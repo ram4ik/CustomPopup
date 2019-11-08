@@ -9,8 +9,43 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var showModal = false
+    
     var body: some View {
-        Text("Hello World")
+        ZStack {
+            Button(action: {
+                self.showModal.toggle()
+            }) {
+                Text("Press me")
+            }
+            if $showModal.wrappedValue {
+                ZStack {
+                    Color.black.opacity(0.3)
+                        .edgesIgnoringSafeArea(.vertical)
+                    
+                    // Popup
+                    VStack(spacing: 20) {
+                        Text("Popup")
+                            .bold()
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color.orange)
+                            .foregroundColor(Color.white)
+                        Spacer()
+                        Button(action: {
+                            self.showModal = false
+                        }) {
+                            Text("Close")
+                        }.padding()
+                            
+                    }.frame(width: 300, height: 200)
+                    .background(Color.white)
+                    .cornerRadius(20)
+                    .shadow(radius: 20)
+                }
+            }
+            
+        }
     }
 }
 
